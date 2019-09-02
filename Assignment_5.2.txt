@@ -1,0 +1,60 @@
+1. Calculate the P Value for the test in Problem 2.
+
+The p-value for this test is the probability of obtaining a z-score equal to observed test statistic (which had z-score = -1.680919) or more extreme, which in this problem statement is less than the observed test statistic. In other words, we want to know the area under a standard normal curve on the interval (-8, -1.680919]. We can get this easily with 
+
+pnorm(-1.680919)
+
+# 0.04638932
+
+> prop.test(1755, 1755 + 2771, p = 0.4, alternative = "less", conf.level = 0.99, correct = FALSE)
+
+# Result
+ 
+1-sample proportions test without continuity correction
+
+data:  1755 out of 1755 + 2771, null probability 0.4
+X-squared = 2.8255, df = 1, p-value = 0.04639
+alternative hypothesis: true p is less than 0.4
+99 percent confidence interval:
+ 0.0000000 0.4047326
+sample estimates:
+        p 
+0.3877596 
+
+
+# Hypothesis test plot based on normal and t.dist from HH package
+
+library(IPSUR) 
+library(HH)
+temp <- prop.test(1755, 1755 + 2771, p = 0.4, alternative = "less", conf.level = 0.99, correct = FALSE) 
+plot(temp, "Hypoth")
+
+
+2. How do you test the proportions and compare against hypothetical props? Test Hypothesis: proportion of automatic cars is 40%.
+
+# Null Hypothesis : Proportion of automatic cars is 40%.
+
+> mtcars
+> View(mtcars)
+> table(mtcars$am)
+
+ 0  1 
+19 13
+
+> prop.test(13, 32, p = 0.4, alternative = "less", conf.level = 0.95, correct = FALSE)
+
+# Result
+
+1-sample proportions test without continuity correction
+
+data:  13 out of 32, null probability 0.4
+X-squared = 0.0052083, df = 1, p-value = 0.5288
+alternative hypothesis: true p is less than 0.4
+95 percent confidence interval:
+ 0.0000000 0.5508812
+sample estimates:
+      p 
+0.40625
+
+# At confidence level of 0.95, since p- value is greater than alpha(0.53 > 0.05), hence we fail to reject the null hypothesis
+
